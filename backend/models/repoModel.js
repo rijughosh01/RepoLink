@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const RepositorySchema = new Schema({
-//   timestamps: true,
+  timestamps: true,
   name: {
     type: String,
     required: true,
