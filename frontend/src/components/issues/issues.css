@@ -1,0 +1,130 @@
+/* General Page Layout */
+body {
+  margin: 0;
+  padding: 20px 40px;
+  background: linear-gradient(135deg, #0d1117, #161b22);
+  color: #c9d1d9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Page Title */
+.page-title {
+  font-size: 2.5rem;
+  color: #58a6ff;
+  margin-bottom: 20px;
+}
+
+/* Error Message */
+.error-message {
+  color: #f85149;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Form Styling */
+.issue-form {
+  width: 100%;
+  max-width: 800px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  font-size: 1rem;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: #58a6ff;
+  box-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
+  outline: none;
+}
+
+.form-textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+/* Submit Button */
+.submit-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #238636;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #2ea043;
+}
+
+.submit-button:disabled {
+  background-color: #2d3748;
+  cursor: not-allowed;
+}
+
+/* Issues List */
+.issues-list {
+  margin-top: 30px;
+}
+
+.issue-item {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.issue-title {
+  font-size: 1.2rem;
+  color: #58a6ff;
+}
+
+.issue-description {
+  font-size: 1rem;
+  color: #8b949e;
+  margin: 10px 0;
+}
+
+.issue-link {
+  font-size: 0.9rem;
+  color: #58a6ff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.issue-link:hover {
+  text-decoration: underline;
+}
+
+.delete-button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+  background-color: #da3633;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #e5534b;
+}

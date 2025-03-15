@@ -60,7 +60,9 @@ const CreateRepo = () => {
   const handleRepoNameChange = (e) => {
     const value = e.target.value;
     if (value.match(/[^a-zA-Z0-9-_]/)) {
-      setError("Repository name can only contain letters, numbers, dashes, and underscores.");
+      setError(
+        "Repository name can only contain letters, numbers, dashes, and underscores."
+      );
     } else {
       setError("");
     }
@@ -69,81 +71,83 @@ const CreateRepo = () => {
 
   return (
     <>
-      <h1 className="repo-title">Create a New Repository</h1>
-      <p className="repo-description">
-        A repository contains all your project’s files and their history. Create a short, memorable name to identify it easily!
+      <h1 className="title">Create a New Repository</h1>
+      <p className="description">
+        A repository contains all your project’s files and their history. Create
+        a short, memorable name to identify it easily!
       </p>
 
-      <form className="repo-form" onSubmit={handleSubmit}>
-        <label htmlFor="repoName" className="form-label">Repository Name *</label>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="repoName" className="label">
+          Repository Name *
+        </label>
         <input
           type="text"
           id="repoName"
-          className="form-input"
+          className="input"
           value={repoName}
           onChange={handleRepoNameChange}
           required
           placeholder="e.g., my-awesome-repo"
         />
-        <p className="form-hint">
-          Great repository names are short and memorable. Need inspiration? Try "stellar-octopus".
-        </p>
+        <p className="hint">Great repository names are short and memorable.</p>
 
-        <label htmlFor="description" className="form-label">Description (optional)</label>
+        <label htmlFor="description" className="label">
+          Description (optional)
+        </label>
         <textarea
           id="description"
-          className="form-textarea"
+          className="textarea"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Write a short description for your repository..."
         />
 
-        <label className="form-label">Visibility</label>
-        <div className="visibility-option">
-          <i className="fas fa-globe visibility-icon" title="Anyone on the internet can see this repository."></i>
-          <input
-            type="radio"
-            value="public"
-            checked={visibility === "public"}
-            onChange={() => setVisibility("public")}
-            id="public"
-            className="visibility-radio"
-          />
-          <label htmlFor="public" className="visibility-label">
-            <strong>Public</strong> – Anyone on the internet can see this repository.
+        <label className="label">Visibility</label>
+        <div className="visibility">
+          <label className="visibility-option">
+            <input
+              type="radio"
+              value="public"
+              checked={visibility === "public"}
+              onChange={() => setVisibility("public")}
+              className="radio"
+            />
+            <i
+              className="fas fa-globe icon"
+              title="Public - Anyone on the internet can see this repository"
+            ></i>
+            <span className="visibility-text">
+              <strong>Public</strong> – Anyone on the internet can see this
+              repository.
+            </span>
           </label>
-        </div>
-        <div className="visibility-option">
-          <i className="fas fa-lock visibility-icon" title="You choose who can see this repository."></i>
-          <input
-            type="radio"
-            value="private"
-            checked={visibility === "private"}
-            onChange={() => setVisibility("private")}
-            id="private"
-            className="visibility-radio"
-          />
-          <label htmlFor="private" className="visibility-label">
-            <strong>Private</strong> – You choose who can see and commit to this repository.
+          <label className="visibility-option">
+            <input
+              type="radio"
+              value="private"
+              checked={visibility === "private"}
+              onChange={() => setVisibility("private")}
+              className="radio"
+            />
+            <i
+              className="fas fa-lock icon"
+              title="Private - Only you can see this repository"
+            ></i>
+            <span className="visibility-text">
+              <strong>Private</strong> – You choose who can see and commit to
+              this repository.
+            </span>
           </label>
         </div>
 
-        {error && <p className="form-error">{error}</p>}
-        {successMessage && <p className="form-success">{successMessage}</p>}
+        {error && <p className="error">{error}</p>}
+        {successMessage && <p className="success">{successMessage}</p>}
 
-        <button type="submit" className="submit-btn" disabled={loading}>
-          {loading ? <div className="loading-spinner"></div> : "Create Repository"}
+        <button type="submit" className="button" disabled={loading}>
+          {loading ? "Creating..." : "Create Repository"}
         </button>
       </form>
-
-      {repoName && (
-        <div className="preview-section">
-          <h3>Preview</h3>
-          <p><strong>Name:</strong> {repoName}</p>
-          {description && <p><strong>Description:</strong> {description}</p>}
-          <p><strong>Visibility:</strong> {visibility === "public" ? "Public" : "Private"}</p>
-        </div>
-      )}
     </>
   );
 };

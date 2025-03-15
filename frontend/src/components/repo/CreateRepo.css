@@ -1,41 +1,42 @@
 /* General Page Layout */
 body {
   margin: 0;
-  padding: 20px;
+  padding: 20px 40px;
   background: linear-gradient(135deg, #0d1117, #161b22);
   color: #c9d1d9;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  min-height: 100vh;
 }
 
 /* Title and Description */
-.repo-title {
-  text-align: center;
+.title {
   font-size: 2.5rem;
   color: #58a6ff;
+  margin-bottom: 10px;
 }
 
-.repo-description {
-  text-align: center;
+.description {
   font-size: 1rem;
   color: #8b949e;
   margin-bottom: 20px;
 }
 
-/* Form Styles */
-.repo-form {
+/* Form Layout */
+form {
+  display: block;
   width: 100%;
   max-width: 800px;
-  margin: 0 auto;
 }
 
-.form-label {
+.label {
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
 }
 
-.form-input,
-.form-textarea {
+.input,
+.textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
@@ -46,58 +47,65 @@ body {
   font-size: 1rem;
 }
 
-.form-input:focus,
-.form-textarea:focus {
+.input:focus,
+.textarea:focus {
   border-color: #58a6ff;
   box-shadow: 0 0 8px rgba(88, 166, 255, 0.5);
   outline: none;
 }
 
-.form-textarea {
+.textarea {
   resize: vertical;
-  height: 80px;
+  height: 100px;
 }
 
-.form-hint {
+.hint {
   font-size: 0.9rem;
   color: #8b949e;
+  margin-bottom: 20px;
 }
 
 /* Visibility Options */
+.visibility {
+  margin-bottom: 20px;
+}
+
 .visibility-option {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.visibility-icon {
+.radio {
+  margin-right: 10px;
+}
+
+.icon {
   font-size: 1.5rem;
   margin-right: 10px;
   color: #8b949e;
 }
 
-.visibility-radio {
-  margin-right: 10px;
-}
-
-.visibility-label {
+.visibility-text {
   font-size: 1rem;
   color: #c9d1d9;
 }
 
-/* Preview Section */
-.preview-section {
-  background-color: #161b22;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 6px;
-  color: #c9d1d9;
+/* Error and Success Messages */
+.error {
+  color: #f85149;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.success {
+  color: #28a745;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
 /* Button Styles */
-.submit-btn {
-  float: right;
-  width: auto;
+.button {
   padding: 8px 16px;
   font-size: 0.9rem;
   font-weight: bold;
@@ -106,55 +114,14 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  margin-top: 20px;
+  float: right;
 }
 
-.submit-btn:hover {
+.button:hover {
   background-color: #2ea043;
 }
 
-/* Error and Success */
-.form-error {
-  color: #f85149;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-.form-success {
-  color: #28a745;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-/* Spinner Animation */
-.loading-spinner {
-  width: 20px;
-  height: 20px;
-  border: 3px solid #fff;
-  border-top: 3px solid #58a6ff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 768px) {
-  .repo-title {
-    font-size: 1.8rem;
-  }
-  .repo-form {
-    width: 95%;
-  }
-  .submit-btn {
-    float: none;
-    width: 100%;
-    margin-top: 10px;
-  }
+.button:disabled {
+  background-color: #2d3748;
+  cursor: not-allowed;
 }
