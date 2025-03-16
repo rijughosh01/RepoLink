@@ -9,8 +9,7 @@ import Signup from "./components/auth/Signup";
 import CreateRepo from "./components/repo/CreateRepo";
 import Issues from "./components/issues/Issues";
 import IssueDetails from "./components/issues/IssueDetails";
-import StarredRepositories from "./components/user/StarredRepositories"; // Import the new page
-
+import StarredRepositories from "./components/user/StarredRepositories";
 // Auth Context
 import { useAuth } from "./authContext";
 

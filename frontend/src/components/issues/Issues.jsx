@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FaBug } from "react-icons/fa";
 import "./issues.css";
 
 const Issues = () => {
@@ -12,6 +13,7 @@ const Issues = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [creating, setCreating] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   useEffect(() => {
     const fetchIssues = async () => {
@@ -85,6 +87,13 @@ const Issues = () => {
 
   return (
     <div className="issues-page">
+      <button
+        className="toggle-button"
+        onClick={() => setIsPopupVisible(!isPopupVisible)}
+      >
+        <FaBug size={24} />
+      </button>
+
       <h1 className="page-title">Issues</h1>
       {error && <p className="error-message">{error}</p>}
 
@@ -134,8 +143,7 @@ const Issues = () => {
           {creating ? "Creating..." : "Create Issue"}
         </button>
       </form>
-
-      <div className="issues-list">
+      <div className={`issues-list ${isPopupVisible ? "visible" : "hidden"}`}>
         {loading ? (
           <p className="loading-message">Loading issues...</p>
         ) : issues.length === 0 ? (
