@@ -1,105 +1,168 @@
-.profile-page-wrapper {
-    display: flex;
-    min-height: 100vh;
-    color: whitesmoke;
-    width: 100%;
-    /* flex-wrap: wrap; */
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  margin: 0;
+}
+
+/* Navigation Styles */
+.profile__navigation {
+  margin-top: 60px;
+  padding: 10px 20px;
+  background-color: #161b22;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navigation__item {
+  color: #8b949e;
+  font-size: 14px;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.navigation__item:hover {
+  color: #c9d1d9;
+}
+
+/* Profile Page Styles */
+.profile__container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  color: whitesmoke;
+}
+
+/* User Section */
+.profile__user-section {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 10px;
+}
+
+.profile__image-container {
+  position: relative;
+  width: 100px;
+  margin: 10px auto;
+}
+
+.profile__image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: grey;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.profile__image-uploaded {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile__image-default {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+/* Camera Icon */
+.profile__upload-icon {
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  background-color: #20272d;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile__upload-icon:hover {
+  background-color: #2d333a;
+}
+
+.profile__camera-icon {
+  font-size: 18px;
+}
+
+/* Username Section */
+.profile__username h3 {
+  text-align: center;
+  color: #58a6ff;
+  font-size: 18px;
+}
+
+/* Follow Button */
+.profile__follow-button {
+  background-color: #20272d;
+  width: 100%;
+  margin: 10px auto;
+  height: 40px;
+  border-radius: 10px;
+  color: whitesmoke;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile__follow-button:hover {
+  background-color: #2d333a;
+}
+
+/* Followers Section */
+.profile__follow-section {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.profile__followers-count,
+.profile__following-count {
+  font-size: 14px;
+  color: #8b949e;
+}
+
+/* Heatmap Section */
+.profile__heatmap-section {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+/* Logout Button */
+.profile__logout-button {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  background-color: #f85149;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile__logout-button:hover {
+  background-color: #da3633;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 750px) {
+  .profile__user-section {
+    margin: auto;
   }
-  
-  .user-profile-section {
-    width: 250px;
-    /* min-height: 100vh; */
-    display: flex;
+
+  .profile__container {
+    display: block;
+  }
+
+  .profile__follow-section {
     flex-direction: column;
-    padding: 40px 10px;
+    align-items: center;
   }
-  
-  .user-repo-section {
-    margin: 0px auto;
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .user-name {
-    /* width: 250px; */
-    margin: 10px 20px 10px 10px;
-    /* margin: 10px auto; */
-  }
-  
-  .profile-image {
-    margin: 10px auto;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: grey;
-  }
-  
-  .follow-btn {
-    background-color: #20272d;
-    width: 250px;
-    margin: 10px auto;
-    height: 40px;
-    border-radius: 10px;
-    color: whitesmoke;
-  }
-  
-  .follower {
-    display: flex;
-    justify-content: center;
-    width: 250px;
-    height: 30px;
-    gap: 10px;
-    margin: 10px auto;
-  }
-  
-  .repo-card-wrapper {
-    margin: 0 auto;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 40px 20px;
-  }
-  
-  .repo {
-    border: 0.5px solid grey;
-    border-radius: 10px;
-    width: 400px;
-    height: 210px;
-    padding: 20px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .repo-name {
-    cursor: pointer;
-    color: #408ced;
-    font-size: 20px;
-  }
-  
-  .description {
-    color: grey;
-    font-size: 15px;
-  }
-  
-  @media screen and (max-width: 750px) {
-    .repo {
-      width: 100%;
-    }
-  }
-  
-  @media screen and (max-width: 570px) {
-    .user-profile-section {
-      margin: auto;
-    }
-  
-    .profile-page-wrapper {
-      display: block;
-    }
-  }
-  
-  #logout:hover {
-    border: 1px solid white;
-  }
+}

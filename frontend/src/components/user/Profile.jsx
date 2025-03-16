@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./profile.css";
 import Navbar from "../Navbar";
 import { UnderlineNav } from "@primer/react";
 import { BookIcon, RepoIcon } from "@primer/octicons-react";
+import { FaCamera } from "react-icons/fa";
 import HeatMapProfile from "./HeatMap";
 import { useAuth } from "../../authContext";
 
 const Profile = () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({ username: "username" });
+  const [profileImage, setProfileImage] = useState(null);
   const { setCurrentUser } = useAuth();
 
   useEffect(() => {
@@ -31,72 +33,106 @@ const Profile = () => {
     fetchUserDetails();
   }, []);
 
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    setCurrentUser(null);
+    window.location.href = "/auth";
+  };
+
   return (
     <>
-      <Navbar />
-      <UnderlineNav aria-label="Repository">
-        <UnderlineNav.Item
-          aria-current="page"
-          icon={BookIcon}
-          sx={{
-            backgroundColor: "transparent",
-            color: "white",
-            "&:hover": {
-              textDecoration: "underline",
+      <Navbar className="nav" />
+      <div className="profile__navigation">
+        <UnderlineNav aria-label="Repository">
+          <UnderlineNav.Item
+            className="navigation__item"
+            aria-current="page"
+            icon={BookIcon}
+            sx={{
+              backgroundColor: "transparent",
               color: "white",
-            },
-          }}
-        >
-          Overview
-        </UnderlineNav.Item>
+              "&:hover": {
+                textDecoration: "underline",
+                color: "white",
+              },
+            }}
+          >
+            Overview
+          </UnderlineNav.Item>
+          <UnderlineNav.Item
+            className="navigation__item"
+            onClick={() => navigate("/starred-repos")}
+            icon={RepoIcon}
+            sx={{
+              backgroundColor: "transparent",
+              color: "whitesmoke",
+              "&:hover": {
+                textDecoration: "underline",
+                color: "white",
+              },
+            }}
+          >
+            Starred Repositories
+          </UnderlineNav.Item>
+        </UnderlineNav>
+      </div>
 
-        <UnderlineNav.Item
-          onClick={() => navigate("/repo")}
-          icon={RepoIcon}
-          sx={{
-            backgroundColor: "transparent",
-            color: "whitesmoke",
-            "&:hover": {
-              textDecoration: "underline",
-              color: "white",
-            },
-          }}
-        >
-          Starred Repositories
-        </UnderlineNav.Item>
-      </UnderlineNav>
-
-      <button
-        onClick={() => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("userId");
-          setCurrentUser(null);
-
-          window.location.href = "/auth";
-        }}
-        style={{ position: "fixed", bottom: "50px", right: "50px" }}
-        id="logout"
-      >
+      <button className="profile__logout-button" onClick={handleLogout}>
         Logout
       </button>
 
-      <div className="profile-page-wrapper">
-        <div className="user-profile-section">
-          <div className="profile-image"></div>
+      <div className="profile__container">
+        <div className="profile__user-section">
+          <div className="profile__image-container">
+            <div className="profile__image">
+              {profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="profile__image-uploaded"
+                />
+              ) : (
+                <div className="profile__image-default"></div>
+              )}
+            </div>
 
-          <div className="name">
+            <label htmlFor="image-upload" className="profile__upload-icon">
+              <FaCamera className="profile__camera-icon" />
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              id="image-upload"
+              onChange={handleImageUpload}
+              style={{ display: "none" }}
+            />
+          </div>
+
+          <div className="profile__username">
             <h3>{userDetails.username}</h3>
           </div>
 
-          <button className="follow-btn">Follow</button>
+          <button className="profile__follow-button">Follow</button>
 
-          <div className="follower">
-            <p>10 Follower</p>
-            <p>3 Following</p>
+          <div className="profile__follow-section">
+            <p className="profile__followers-count">10 Followers</p>
+            <p className="profile__following-count">3 Following</p>
           </div>
         </div>
 
-        <div className="heat-map-section">
+        <div className="profile__heatmap-section">
           <HeatMapProfile />
         </div>
       </div>
