@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
 import Navbar from "../Navbar";
+import API_BASE_URL from "../../config.js";
 
 const Dashboard = () => {
   const [repositories, setRepositories] = useState([]);
@@ -18,9 +19,7 @@ const Dashboard = () => {
 
     const fetchRepositories = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:3002/repo/user/${userId}`
-        );
+        const response = await fetch(`${API_BASE_URL}/repo/user/${userId}`);
         const data = await response.json();
         setRepositories(data.repositories || []);
       } catch (err) {
@@ -30,7 +29,7 @@ const Dashboard = () => {
 
     const fetchSuggestedRepositories = async () => {
       try {
-        const response = await fetch(`http://localhost:3002/repo/all`);
+        const response = await fetch(`${API_BASE_URL}/repo/all`);
         const data = await response.json();
         setSuggestedRepositories(data || []);
       } catch (err) {
@@ -69,12 +68,9 @@ const Dashboard = () => {
 
     setDeletingRepoId(repoId);
     try {
-      const response = await fetch(
-        `http://localhost:3002/repo/delete/${repoId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/repo/delete/${repoId}`, {
+        method: "DELETE",
+      });
       const data = await response.json();
 
       if (!response.ok) {
@@ -99,12 +95,9 @@ const Dashboard = () => {
   const toggleVisibility = async (repoId) => {
     setTogglingVisibilityId(repoId);
     try {
-      const response = await fetch(
-        `http://localhost:3002/repo/toggle/${repoId}`,
-        {
-          method: "PATCH",
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/repo/toggle/${repoId}`, {
+        method: "PATCH",
+      });
 
       const data = await response.json();
 
@@ -144,12 +137,9 @@ const Dashboard = () => {
 
     setMigratingVisibility(true);
     try {
-      const response = await fetch(
-        `http://localhost:3002/repo/migrate-visibility`,
-        {
-          method: "PATCH",
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/repo/migrate-visibility`, {
+        method: "PATCH",
+      });
 
       const data = await response.json();
 
@@ -176,16 +166,13 @@ const Dashboard = () => {
 
     setStarringRepoId(repoId);
     try {
-      const response = await fetch(
-        `http://localhost:3002/repo/star/${repoId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userID: userId }),
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/repo/star/${repoId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userID: userId }),
+      });
 
       const data = await response.json();
 
