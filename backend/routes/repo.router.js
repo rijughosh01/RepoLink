@@ -14,5 +14,9 @@ repoRouter.get(
 repoRouter.put("/repo/update/:id", repoController.updateRepositoryById);
 repoRouter.delete("/repo/delete/:id", repoController.deleteRepositoryById);
 repoRouter.patch("/repo/toggle/:id", repoController.toggleVisibilityById);
-
+repoRouter.patch(
+  "/repo/migrate-visibility",
+  repoController.migrateVisibilityField
+);
+repoRouter.post("/repo/star/:id", repoController.starRepository);
 module.exports = repoRouter;

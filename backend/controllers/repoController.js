@@ -6,17 +6,12 @@ async function createRepository(req, res) {
   const { owner, name, issues, content, description, visibility } = req.body;
 
   try {
-    // Validate repository name
     if (!name) {
       return res.status(400).json({ error: "Repository name is required!" });
     }
-
-    // Validate owner ID
     if (!mongoose.Types.ObjectId.isValid(owner)) {
       return res.status(400).json({ error: "Invalid User ID!" });
     }
-
-    // Validate visibility
     if (visibility !== "public" && visibility !== "private") {
       return res
         .status(400)
@@ -49,7 +44,7 @@ async function createRepository(req, res) {
 async function getAllRepositories(req, res) {
   try {
     const repositories = await Repository.find({})
-      .populate("owner", "username email") 
+      .populate("owner", "username email")
       .populate("issues");
 
     res.json(repositories);
@@ -226,6 +221,42 @@ async function migrateVisibilityField(req, res) {
     res.status(500).json({ error: "Server error. Please try again later." });
   }
 }
+// Function to star a repository by ID
+async function starRepository(req, res) {
+  const { id } = req.params;
+  const { userID } = req.body;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid Repository ID!" });
+    }
+    if (!mongoose.Types.ObjectId.isValid(userID)) {
+      return res.status(400).json({ error: "Invalid User ID!" });
+    }
+
+    const repository = await Repository.findById(id);
+    if (!repository) {
+      return res.status(404).json({ error: "Repository not found!" });
+    }
+    if (repository.stars && repository.stars.includes(userID)) {
+      return res
+        .status(400)
+        .json({ error: "You have already starred this repository!" });
+    }
+    repository.stars = repository.stars || [];
+    repository.stars.push(userID);
+
+    const updatedRepository = await repository.save();
+
+    res.json({
+      message: "Repository starred successfully!",
+      repository: updatedRepository,
+    });
+  } catch (err) {
+    console.error("Error during starring repository:", err.message);
+    res.status(500).json({ error: "Server error. Please try again later." });
+  }
+}
 
 module.exports = {
   createRepository,
@@ -237,4 +268,5 @@ module.exports = {
   toggleVisibilityById,
   deleteRepositoryById,
   migrateVisibilityField,
+  starRepository,
 };
