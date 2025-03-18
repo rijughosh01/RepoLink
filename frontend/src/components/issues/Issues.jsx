@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaBug } from "react-icons/fa";
 import "./issues.css";
+import API_BASE_URL from "../../config.js";
 
 const Issues = () => {
   const [issues, setIssues] = useState([]);
@@ -19,7 +20,7 @@ const Issues = () => {
     const fetchIssues = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3002/issue/all");
+        const response = await fetch(`${API_BASE_URL}/issue/all`);
         const data = await response.json();
 
         if (!response.ok) {
@@ -44,7 +45,7 @@ const Issues = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:3002/issue/create", {
+      const response = await fetch(`${API_BASE_URL}/issue/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newIssue),
@@ -68,7 +69,7 @@ const Issues = () => {
 
   const handleDeleteIssue = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3002/issue/delete/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/issue/delete/${id}`, {
         method: "DELETE",
       });
 

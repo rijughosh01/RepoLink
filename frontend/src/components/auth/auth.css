@@ -5,10 +5,10 @@
   font-family: "Arial", sans-serif;
   background-color: #0d1117;
   display: flex;
-  flex-direction: column; /* Ensures a top-to-bottom layout */
+  flex-direction: column; 
   align-items: center;
   justify-content: center;
-  gap: 20px; /* Adds spacing between sections */
+  gap: 20px;
 }
 
 .login-logo-container {

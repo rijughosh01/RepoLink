@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateRepo.css";
+import API_BASE_URL from "../../config.js";
 
 const CreateRepo = () => {
   const [repoName, setRepoName] = useState("");
@@ -33,7 +34,7 @@ const CreateRepo = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:3002/repo/create", {
+      const response = await fetch(`${API_BASE_URL}/repo/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

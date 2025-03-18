@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [togglingVisibilityId, setTogglingVisibilityId] = useState(null);
   const [migratingVisibility, setMigratingVisibility] = useState(false);
   const [starringRepoId, setStarringRepoId] = useState(null);
+  const [showSuggestedRepos, setShowSuggestedRepos] = useState(false);
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -201,14 +202,25 @@ const Dashboard = () => {
       <Navbar />
       <section id="dashboard">
         <aside>
-          <h3>Suggested Repositories</h3>
-          {suggestedRepositories &&
-            suggestedRepositories.map((repo) => (
-              <div key={repo._id}>
-                <h4>{repo.name}</h4>
-                <h4>{repo.description}</h4>
-              </div>
-            ))}
+          <button
+            onClick={() => setShowSuggestedRepos(!showSuggestedRepos)}
+            className="toggle-suggested-button"
+          >
+            {showSuggestedRepos ? "" : ""}
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          {showSuggestedRepos && (
+            <>
+              <h3>Suggested Repositories</h3>
+              {suggestedRepositories &&
+                suggestedRepositories.map((repo) => (
+                  <div key={repo._id}>
+                    <h4>{repo.name}</h4>
+                    <h4>{repo.description}</h4>
+                  </div>
+                ))}
+            </>
+          )}
         </aside>
         <main>
           <h2>Your Repositories</h2>

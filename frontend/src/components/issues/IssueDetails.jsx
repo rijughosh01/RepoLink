@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import API_BASE_URL from "../../config.js";
 
 const IssueDetails = () => {
   const { id } = useParams();
@@ -10,7 +11,7 @@ const IssueDetails = () => {
   useEffect(() => {
     const fetchIssueDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3002/issue/${id}`);
+        const response = await fetch(`${API_BASE_URL}/issue/${id}`);
         const data = await response.json();
 
         if (!response.ok) {
