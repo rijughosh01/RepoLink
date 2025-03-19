@@ -107,3 +107,26 @@ body {
   opacity: 1;
   transform: translateX(10px);
 }
+
+.navbar-search {
+  display: flex;
+  margin-left: 100px;
+}
+
+.navbar-search input {
+  width: 250px;
+  padding: 5px 10px;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  background-color: #1f1e1e;
+  color: #eceef0;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+  margin-left: 560px;
+}
+
+.navbar-search input:focus {
+  border-color: #0366d6;
+  outline: none;
+  box-shadow: 0 0 0 1px rgba(3, 102, 214, 0.3);
+}

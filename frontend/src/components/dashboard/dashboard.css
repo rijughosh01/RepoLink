@@ -11,17 +11,23 @@
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .delete-button:disabled {
   background-color: gray;
   cursor: not-allowed;
 }
+
 .star-button .fa-star {
   font-size: 24px;
   color: #ccc;
   transition: color 0.3s;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .star-button .fa-star:hover {
@@ -42,4 +48,117 @@
   margin-left: 10px;
   position: absolute;
   left: 0;
+}
+
+.repo-section {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+}
+
+.repo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.repo-title {
+  margin: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #0366d6;
+  position: absolute;
+  top: 70px;
+  left: 10px;
+}
+
+.repo-id {
+  margin: 0;
+  font-weight: bold;
+  color: #0366d6;
+  position: absolute;
+  top: 40px;
+  left: 10px;
+}
+
+.repo-details {
+  margin-top: 60px;
+}
+
+.repo-description {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.toggle-visibility-button {
+  margin-left: 10px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.repo-visibility {
+  background-color: #0366d6;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.toggle-repo-id-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #ccc;
+}
+
+.toggle-repo-id-button:hover {
+  color: #0366d6;
+}
+
+.repo-section .repo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.repo-section .repo-header h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #f8f9fa;
+}
+
+.repo-section .repo-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.repo-section .repo-header .tags {
+  display: flex;
+  gap: 8px;
+}
+
+.repo-section .repo-header .tags span {
+  background-color: #444;
+  color: #ccc;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.repo-section .repo-header .updated {
+  font-size: 12px;
+  color: #ccc;
 }

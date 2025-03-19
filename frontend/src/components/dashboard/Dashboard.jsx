@@ -11,7 +11,6 @@ const Dashboard = () => {
   const [visibleRepoIds, setVisibleRepoIds] = useState({});
   const [deletingRepoId, setDeletingRepoId] = useState(null);
   const [togglingVisibilityId, setTogglingVisibilityId] = useState(null);
-  const [migratingVisibility, setMigratingVisibility] = useState(false);
   const [starringRepoId, setStarringRepoId] = useState(null);
   const [showSuggestedRepos, setShowSuggestedRepos] = useState(false);
 
@@ -129,34 +128,6 @@ const Dashboard = () => {
     }
   };
 
-  const migrateVisibility = async () => {
-    const confirmMigration = window.confirm(
-      "Are you sure you want to migrate the visibility fields for all repositories? This action will update the database."
-    );
-
-    if (!confirmMigration) return;
-
-    setMigratingVisibility(true);
-    try {
-      const response = await fetch(`${API_BASE_URL}/repo/migrate-visibility`, {
-        method: "PATCH",
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.error || "Failed to migrate visibility fields.");
-      } else {
-        alert(data.message || "Visibility field migration completed!");
-      }
-    } catch (err) {
-      console.error("Error while migrating visibility fields:", err.message);
-      alert("Server error. Please try again later.");
-    } finally {
-      setMigratingVisibility(false);
-    }
-  };
-
   const starRepository = async (repoId) => {
     const userId = localStorage.getItem("userId");
 
@@ -199,7 +170,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <section id="dashboard">
         <aside>
           <button
@@ -207,7 +178,7 @@ const Dashboard = () => {
             className="toggle-suggested-button"
           >
             {showSuggestedRepos ? "" : ""}
-            <i class="fa-solid fa-bars"></i>
+            <i className="fa-solid fa-bars"></i>
           </button>
           {showSuggestedRepos && (
             <>
@@ -224,68 +195,9 @@ const Dashboard = () => {
         </aside>
         <main>
           <h2>Your Repositories</h2>
-          <div id="search">
-            <input
-              type="text"
-              value={searchQuery}
-              placeholder="Search..."
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-          <button
-            className="migrate-button"
-            onClick={migrateVisibility}
-            disabled={migratingVisibility}
-          >
-            {migratingVisibility
-              ? "Migrating Visibility Fields..."
-              : "Migrate Visibility Fields"}
-          </button>
           {searchResults &&
             searchResults.map((repo) => (
-              <div key={repo._id}>
-                <div className="repo-header">
-                  <button
-                    onClick={() => toggleRepoIdVisibility(repo._id)}
-                    className="toggle-repo-id-button"
-                    style={{
-                      cursor: "pointer",
-                      border: "none",
-                      background: "transparent",
-                    }}
-                  >
-                    <i
-                      className="fas fa-eye"
-                      title={`Toggle Repo ID for ${repo.name}`}
-                    ></i>
-                  </button>
-                  {visibleRepoIds[repo._id] && (
-                    <h4 style={{ display: "inline", marginLeft: "10px" }}>
-                      Repo ID: {repo._id}
-                    </h4>
-                  )}
-                </div>
-                <h4>Name: {repo.name}</h4>
-                <h4>Description: {repo.description}</h4>
-                <h4>Visibility: {repo.visibility}</h4>
-                <button
-                  className="toggle-visibility-button"
-                  onClick={() => toggleVisibility(repo._id)}
-                  disabled={togglingVisibilityId === repo._id}
-                >
-                  {togglingVisibilityId === repo._id
-                    ? "Toggling..."
-                    : `Set to ${
-                        repo.visibility === "public" ? "Private" : "Public"
-                      }`}
-                </button>
-                <button
-                  className="delete-button"
-                  onClick={() => deleteRepository(repo._id)}
-                  disabled={deletingRepoId === repo._id}
-                >
-                  {deletingRepoId === repo._id ? "Deleting..." : "Delete"}
-                </button>
+              <div key={repo._id} className="repo-section">
                 <button
                   className="star-button"
                   onClick={() => starRepository(repo._id)}
@@ -306,6 +218,54 @@ const Dashboard = () => {
                     title="Star Repository"
                   ></i>
                 </button>
+                <div className="repo-header">
+                  <button
+                    onClick={() => toggleRepoIdVisibility(repo._id)}
+                    className="toggle-repo-id-button"
+                    style={{
+                      cursor: "pointer",
+                      border: "none",
+                      background: "transparent",
+                    }}
+                  >
+                    <i
+                      className="fas fa-eye"
+                      title={`Toggle Repo ID for ${repo.name}`}
+                    ></i>
+                  </button>
+                  {visibleRepoIds[repo._id] && (
+                    <h4 className="repo-id">
+                    ID: {repo._id}
+                    </h4>
+                  )}
+                </div>
+                <div className="repo-details">
+                  <h4 className="repo-title">{repo.name}</h4>
+                  <p className="repo-description">
+                    Description: {repo.description}
+                  </p>
+                  <div className="repo-visibility">
+                    {repo.visibility}
+                  </div>
+                  <button
+                    className="delete-button"
+                    onClick={() => deleteRepository(repo._id)}
+                    disabled={deletingRepoId === repo._id}
+                  >
+                    {deletingRepoId === repo._id ? "Deleting..." : "Delete"}
+                  </button>
+                  <button
+                    className="toggle-visibility-button"
+                    onClick={() => toggleVisibility(repo._id)}
+                    disabled={togglingVisibilityId === repo._id}
+                  >
+                    {togglingVisibilityId === repo._id
+                      ? "Toggling..."
+                      : `Set to ${
+                          repo.visibility === "public" ? "Private" : "Public"
+                        }`}
+                  </button>
+                </div>
               </div>
             ))}
         </main>

@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ searchQuery, setSearchQuery }) => {
   return (
     <header className="navbar">
       {/* Logo Section */}
@@ -20,6 +20,16 @@ const Navbar = () => {
         />
         <h3 className="logo-text">Repo Link</h3>
       </Link>
+
+      {/* Search Input */}
+      <div className="navbar-search">
+        <input
+          type="text"
+          value={searchQuery}
+          placeholder="Search..."
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
 
       <nav className="navbar-icons">
         <Link to="/create" className="navbar-item">

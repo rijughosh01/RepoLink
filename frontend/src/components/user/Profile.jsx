@@ -50,6 +50,17 @@ const Profile = () => {
     setCurrentUser(null);
     window.location.href = "/auth";
   };
+  const handleDeleteProfile = async () => {
+    const userId = localStorage.getItem("userId");
+
+    try {
+      await axios.delete(`http://localhost:3002/deleteProfile/${userId}`);
+      alert("Profile deleted!");
+      handleLogout();
+    } catch (err) {
+      console.error("Error during deleting profile: ", err);
+    }
+  };
 
   return (
     <>
@@ -134,6 +145,9 @@ const Profile = () => {
 
         <div className="profile__heatmap-section">
           <HeatMapProfile />
+        </div>
+        <div className="profile__actions">
+          <button onClick={handleDeleteProfile}>Delete Profile</button>
         </div>
       </div>
     </>
