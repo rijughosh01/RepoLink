@@ -10,7 +10,7 @@ import CreateRepo from "./components/repo/CreateRepo";
 import Issues from "./components/issues/Issues";
 import IssueDetails from "./components/issues/IssueDetails";
 import StarredRepositories from "./components/user/StarredRepositories";
-// Auth Context
+import RepoDetails from "./components/repo/RepoDetails";
 import { useAuth } from "./authContext";
 
 const ProjectRoutes = () => {
@@ -68,6 +68,10 @@ const ProjectRoutes = () => {
     {
       path: "/starred-repos",
       element: <StarredRepositories />,
+    },
+    {
+      path: "/repo/:id",
+      element: <RepoDetails />,
     },
   ]);
 
