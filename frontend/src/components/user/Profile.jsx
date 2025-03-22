@@ -8,6 +8,7 @@ import { BookIcon, RepoIcon } from "@primer/octicons-react";
 import { FaCamera } from "react-icons/fa";
 import HeatMapProfile from "./HeatMap";
 import { useAuth } from "../../authContext";
+import API_BASE_URL from "../../config.js";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Profile = () => {
       if (userId) {
         try {
           const response = await axios.get(
-            `http://localhost:3002/userProfile/${userId}`
+            `${API_BASE_URL}/userProfile/${userId}`
           );
           setUserDetails(response.data);
         } catch (err) {
@@ -54,7 +55,7 @@ const Profile = () => {
     const userId = localStorage.getItem("userId");
 
     try {
-      await axios.delete(`http://localhost:3002/deleteProfile/${userId}`);
+      await axios.delete(`${API_BASE_URL}/deleteProfile/${userId}`);
       alert("Profile deleted!");
       handleLogout();
     } catch (err) {

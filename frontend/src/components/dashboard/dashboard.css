@@ -2,6 +2,7 @@
   display: flex;
   width: 1080px;
   justify-content: space-between;
+  margin-top: 60px;
 }
 
 .delete-button {
@@ -168,4 +169,109 @@
 }
 .repo-title-link:hover .repo-title {
   text-decoration: underline;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #080808;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease, box-shadow 0.3s ease;
+  z-index: 500;
+  padding-top: 120px;
+}
+
+.side-menu.open {
+  left: 0;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-suggested-button {
+  position: fixed;
+  top: 100px;
+  left: 10px;
+  background-color: #070707;
+  color: rgb(247, 246, 246);
+  border: 1px solid #535353;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.toggle-suggested-button:hover {
+  background-color: #535353;
+  transform: scale(1.1);
+}
+
+.suggested-repos-menu {
+  padding: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.suggested-repos-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.suggested-repos-menu li {
+  margin: 5px 0;
+}
+
+.suggested-repo-link {
+  color: #0366d6;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.suggested-repo-link:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+main {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.events-section {
+  width: 300px;
+  margin-left: 20px;
+}
+
+.events-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.event-item {
+  border: 1px solid #5b85b4;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #0d1117;
+}
+
+.event-item h4 {
+  margin: 0 0 5px 0;
+}
+
+.event-item p {
+  margin: 5px 0;
 }

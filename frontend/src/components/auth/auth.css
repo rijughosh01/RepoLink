@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px; /* Adds space below the logo */
+  margin-bottom: 20px;
 }
 
 .logo-login {
@@ -80,7 +80,7 @@
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin-top: 10px; /* Adds space between the password field and button */
+  margin-top: 10px; 
 }
 
 .login-btn:hover {

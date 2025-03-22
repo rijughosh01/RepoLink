@@ -173,25 +173,30 @@ const Dashboard = () => {
     <>
       <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <section id="dashboard">
-        <aside>
+        <aside className={`side-menu ${showSuggestedRepos ? "open" : ""}`}>
           <button
             onClick={() => setShowSuggestedRepos(!showSuggestedRepos)}
             className="toggle-suggested-button"
           >
-            {showSuggestedRepos ? "" : ""}
             <i className="fa-solid fa-bars"></i>
           </button>
           {showSuggestedRepos && (
-            <>
+            <div className="suggested-repos-menu">
               <h3>Suggested Repositories</h3>
-              {suggestedRepositories &&
-                suggestedRepositories.map((repo) => (
-                  <div key={repo._id}>
-                    <h4>{repo.name}</h4>
-                    <h4>{repo.description}</h4>
-                  </div>
-                ))}
-            </>
+              <ul>
+                {suggestedRepositories &&
+                  suggestedRepositories.map((repo) => (
+                    <li key={repo._id}>
+                      <Link
+                        to={`/repo/${repo._id}`}
+                        className="suggested-repo-link"
+                      >
+                        {repo.name}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </div>
           )}
         </aside>
         <main>
@@ -235,21 +240,15 @@ const Dashboard = () => {
                     ></i>
                   </button>
                   {visibleRepoIds[repo._id] && (
-                    <h4 className="repo-id">
-                    ID: {repo._id}
-                    </h4>
+                    <h4 className="repo-id">ID: {repo._id}</h4>
                   )}
                 </div>
                 <div className="repo-details">
                   <Link to={`/repo/${repo._id}`} className="repo-title-link">
                     <h4 className="repo-title">{repo.name}</h4>
                   </Link>
-                  <p className="repo-description">
-                  {repo.description}
-                  </p>
-                  <div className="repo-visibility">
-                    {repo.visibility}
-                  </div>
+                  <p className="repo-description">{repo.description}</p>
+                  <div className="repo-visibility">{repo.visibility}</div>
                   <button
                     className="delete-button"
                     onClick={() => deleteRepository(repo._id)}
@@ -272,17 +271,69 @@ const Dashboard = () => {
               </div>
             ))}
         </main>
-        <aside>
+        <aside className="events-section">
           <h3>Upcoming Events</h3>
-          <ul>
-            <li>
-              <p>Tech Conference - Dec 15</p>
+          <ul className="events-list">
+            <li className="event-item">
+              <h4>Tech Conference</h4>
+              <p>Date: Dec 15</p>
+              <p>Time: 10:00 AM - 4:00 PM</p>
+              <p>Location: Tech Park, Building A</p>
+              <p>
+                Description: A conference to discuss the latest in technology.
+              </p>
             </li>
-            <li>
-              <p>Developer Meetup - Dec 25</p>
+            <li className="event-item">
+              <h4>Developer Meetup</h4>
+              <p>Date: Dec 25</p>
+              <p>Time: 1:00 PM - 5:00 PM</p>
+              <p>Location: Downtown Conference Center</p>
+              <p>
+                Description: A meetup for developers to network and share
+                knowledge.
+              </p>
             </li>
-            <li>
-              <p>React Summit - Jan 5</p>
+            <li className="event-item">
+              <h4>React Summit</h4>
+              <p>Date: Jan 5</p>
+              <p>Time: 9:00 AM - 3:00 PM</p>
+              <p>Location: Online</p>
+              <p>Description: A summit focused on React and its ecosystem.</p>
+            </li>
+            <li className="event-item">
+              <h4>AI Workshop</h4>
+              <p>Date: Jan 20</p>
+              <p>Time: 11:00 AM - 2:00 PM</p>
+              <p>Location: Innovation Hub</p>
+              <p>Description: A workshop on the latest advancements in AI.</p>
+            </li>
+            <li className="event-item">
+              <h4>Cloud Expo</h4>
+              <p>Date: Feb 10</p>
+              <p>Time: 9:00 AM - 5:00 PM</p>
+              <p>Location: Convention Center</p>
+              <p>
+                Description: An expo showcasing cloud technologies and services.
+              </p>
+            </li>
+            <li className="event-item">
+              <h4>JavaScript Bootcamp</h4>
+              <p>Date: Feb 25</p>
+              <p>Time: 10:00 AM - 4:00 PM</p>
+              <p>Location: Online</p>
+              <p>
+                Description: An intensive bootcamp on JavaScript programming.
+              </p>
+            </li>
+            <li className="event-item">
+              <h4>Cybersecurity Summit</h4>
+              <p>Date: Mar 5</p>
+              <p>Time: 9:00 AM - 3:00 PM</p>
+              <p>Location: Tech Park, Building B</p>
+              <p>
+                Description: A summit focused on cybersecurity trends and
+                practices.
+              </p>
             </li>
           </ul>
         </aside>

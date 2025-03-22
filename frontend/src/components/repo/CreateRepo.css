@@ -93,7 +93,7 @@ form {
 
 /* Error and Success Messages */
 .error {
-  color: #f85149;
+  color: #f85149 !important;
   margin-bottom: 10px;
   font-weight: bold;
 }
