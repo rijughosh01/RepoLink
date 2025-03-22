@@ -19,7 +19,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:3002/signup", {
+      const res = await axios.post("https://repolink.onrender.com/signup", {
         email: email,
         password: password,
         username: username,
