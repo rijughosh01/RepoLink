@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./dashboard.css";
 import Navbar from "../Navbar";
 import API_BASE_URL from "../../config.js";
@@ -240,9 +241,11 @@ const Dashboard = () => {
                   )}
                 </div>
                 <div className="repo-details">
-                  <h4 className="repo-title">{repo.name}</h4>
+                  <Link to={`/repo/${repo._id}`} className="repo-title-link">
+                    <h4 className="repo-title">{repo.name}</h4>
+                  </Link>
                   <p className="repo-description">
-                    Description: {repo.description}
+                  {repo.description}
                   </p>
                   <div className="repo-visibility">
                     {repo.visibility}

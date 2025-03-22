@@ -51,8 +51,8 @@
 }
 
 .repo-section {
-  background-color: #1e1e1e;
-  color: white;
+  background-color: #0d1117;
+  color: #bdbdbd;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 8px;
@@ -75,7 +75,7 @@
   color: #0366d6;
   position: absolute;
   top: 70px;
-  left: 10px;
+  left: 20px;
 }
 
 .repo-id {
@@ -92,8 +92,12 @@
 }
 
 .repo-description {
-  font-size: 14px;
-  margin-top: 5px;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: justify;
+  word-wrap: break-word;
+  max-width: 85%;
+  margin-top: 8px;
 }
 
 .toggle-visibility-button {
@@ -135,8 +139,8 @@
 
 .repo-section .repo-header h4 {
   margin: 0;
-  font-size: 18px;
-  color: #f8f9fa;
+  font-size: 16px;
+  color: #bdbdbd;
 }
 
 .repo-section .repo-header p {
@@ -161,4 +165,7 @@
 .repo-section .repo-header .updated {
   font-size: 12px;
   color: #ccc;
+}
+.repo-title-link:hover .repo-title {
+  text-decoration: underline;
 }
