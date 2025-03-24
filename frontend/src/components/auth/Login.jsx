@@ -8,6 +8,7 @@ import "./auth.css";
 
 import logo from "../../assets/github-mark-white.svg";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "../../config.js";
 
 const Login = () => {
   // useEffect(() => {
@@ -26,7 +27,7 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("https://repolink.onrender.com/login", {
+      const res = await axios.post(`${API_BASE_URL}/login`, {
         email: email,
         password: password,
       });
